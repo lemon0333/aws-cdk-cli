@@ -1,5 +1,5 @@
 {
-  "manifestVersion": 2,
+  "manifestVersion": 3,
   "env": {
     "PATH": "$(yarn exec node --print process.env.PATH)"
   },
@@ -37,7 +37,7 @@
         "VERSIONRCOPTIONS": "{\"path\":\".\"}",
         "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "NEXT_VERSION_COMMAND": "tsx ../../../projenrc/next-version.ts maybeRc",
-        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep \"^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+\" -- .",
+        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep '^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+' -- .",
         "MAJOR": "2"
       },
       "steps": [
@@ -56,12 +56,7 @@
         "CI": "0",
         "YARN_ENABLE_IMMUTABLE_INSTALLS": "false",
         "YARN_NPM_MINIMAL_AGE_GATE": "4320"
-      },
-      "steps": [
-        {
-          "exec": "yarn dlx npm-check-updates@20 --upgrade --target=minor --cooldown=3 --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@cdklabs/eslint-plugin,@types/jest,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-jest,eslint-plugin-jsdoc,eslint-plugin-prettier,fast-check,jest,license-checker,nx,projen,ts-jest,@aws-cdk/aws-service-spec,@aws-cdk/service-spec-types,diff,fast-deep-equal"
-        }
-      ]
+      }
     },
     "check-licenses": {
       "name": "check-licenses",
@@ -220,7 +215,7 @@
         "VERSIONRCOPTIONS": "{\"path\":\".\"}",
         "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "NEXT_VERSION_COMMAND": "tsx ../../../projenrc/next-version.ts maybeRc",
-        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep \"^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+\" -- ."
+        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep '^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+' -- ."
       },
       "steps": [
         {

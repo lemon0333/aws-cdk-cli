@@ -1,5 +1,5 @@
 {
-  "manifestVersion": 2,
+  "manifestVersion": 3,
   "env": {
     "PATH": "$(yarn exec node --print process.env.PATH)"
   },
@@ -37,7 +37,7 @@
         "VERSIONRCOPTIONS": "{\"path\":\".\"}",
         "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "NEXT_VERSION_COMMAND": "tsx ../../projenrc/next-version.ts neverMajor maybeRc",
-        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep \"^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+\" -- . ../@aws-cdk/cloud-assembly-schema ../@aws-cdk/cloud-assembly-api ../@aws-cdk/cloudformation-diff ../@aws-cdk/toolkit-lib",
+        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep '^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+' -- . ../@aws-cdk/cloud-assembly-schema ../@aws-cdk/cloud-assembly-api ../@aws-cdk/cloudformation-diff ../@aws-cdk/toolkit-lib",
         "MAJOR": "2"
       },
       "steps": [
@@ -56,12 +56,7 @@
         "CI": "0",
         "YARN_ENABLE_IMMUTABLE_INSTALLS": "false",
         "YARN_NPM_MINIMAL_AGE_GATE": "4320"
-      },
-      "steps": [
-        {
-          "exec": "yarn dlx npm-check-updates@20 --upgrade --target=minor --cooldown=3 --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@cdklabs/eslint-plugin,@types/jest,@types/mockery,@types/picomatch,@types/promptly,@types/semver,@types/sinon,@types/yazl,aws-sdk-client-mock,aws-sdk-client-mock-jest,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-jest,eslint-plugin-jsdoc,eslint-plugin-prettier,fast-check,jest,jest-environment-node,jest-mock,license-checker,node-backpack,nx,projen,sinon,ts-jest,ts-mock-imports,ts-node,tsx,cdk-from-cfn,enquirer,fast-glob,picomatch,promptly,proxy-agent,semver,yazl"
-        }
-      ]
+      }
     },
     "check-licenses": {
       "name": "check-licenses",
@@ -235,7 +230,7 @@
         "VERSIONRCOPTIONS": "{\"path\":\".\"}",
         "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "NEXT_VERSION_COMMAND": "tsx ../../projenrc/next-version.ts neverMajor maybeRc",
-        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep \"^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+\" -- . ../@aws-cdk/cloud-assembly-schema ../@aws-cdk/cloud-assembly-api ../@aws-cdk/cloudformation-diff ../@aws-cdk/toolkit-lib"
+        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep '^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+' -- . ../@aws-cdk/cloud-assembly-schema ../@aws-cdk/cloud-assembly-api ../@aws-cdk/cloudformation-diff ../@aws-cdk/toolkit-lib"
       },
       "steps": [
         {
@@ -258,13 +253,28 @@
       },
       "steps": [
         {
-          "exec": "yarn dlx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=aws-cdk-lib"
+          "execArgs": [
+            "yarn",
+            "dlx",
+            "npm-check-updates@20",
+            "--upgrade",
+            "--target=minor",
+            "--peer",
+            "--no-deprecated",
+            "--dep=dev,prod,peer,optional",
+            "--filter=aws-cdk-lib"
+          ]
         },
         {
           "exec": "yarn install --no-immutable"
         },
         {
-          "exec": "yarn up -R aws-cdk-lib"
+          "execArgs": [
+            "yarn",
+            "up",
+            "-R",
+            "aws-cdk-lib"
+          ]
         },
         {
           "exec": "yarn projen"

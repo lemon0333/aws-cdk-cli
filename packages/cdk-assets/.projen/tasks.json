@@ -1,5 +1,5 @@
 {
-  "manifestVersion": 2,
+  "manifestVersion": 3,
   "env": {
     "PATH": "$(yarn exec node --print process.env.PATH)"
   },
@@ -37,7 +37,7 @@
         "VERSIONRCOPTIONS": "{\"path\":\".\"}",
         "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "NEXT_VERSION_COMMAND": "tsx ../../projenrc/next-version.ts maybeRc",
-        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep \"^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+\" -- . ../@aws-cdk/cdk-assets-lib ../@aws-cdk/cloud-assembly-schema",
+        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep '^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+' -- . ../@aws-cdk/cdk-assets-lib ../@aws-cdk/cloud-assembly-schema",
         "MAJOR": "4"
       },
       "steps": [
@@ -56,12 +56,7 @@
         "CI": "0",
         "YARN_ENABLE_IMMUTABLE_INSTALLS": "false",
         "YARN_NPM_MINIMAL_AGE_GATE": "4320"
-      },
-      "steps": [
-        {
-          "exec": "yarn dlx npm-check-updates@20 --upgrade --target=minor --cooldown=3 --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@cdklabs/eslint-plugin,@types/jest,@types/yargs,aws-sdk-client-mock,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-jest,eslint-plugin-jsdoc,eslint-plugin-prettier,jest,license-checker,node-backpack,nx,projen,ts-jest,yargs"
-        }
-      ]
+      }
     },
     "check-licenses": {
       "name": "check-licenses",
@@ -216,7 +211,7 @@
         "VERSIONRCOPTIONS": "{\"path\":\".\"}",
         "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "NEXT_VERSION_COMMAND": "tsx ../../projenrc/next-version.ts maybeRc",
-        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep \"^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+\" -- . ../@aws-cdk/cdk-assets-lib ../@aws-cdk/cloud-assembly-schema"
+        "RELEASABLE_COMMITS": "git log --no-merges --oneline $LATEST_TAG..HEAD -E --grep '^(feat|fix){1}(\\([^()[:space:]]+\\))?(!)?:[[:blank:]]+.+' -- . ../@aws-cdk/cdk-assets-lib ../@aws-cdk/cloud-assembly-schema"
       },
       "steps": [
         {
